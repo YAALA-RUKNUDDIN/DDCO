@@ -3,50 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Programs - PDF Viewer</title>
+  <title>Two Links Viewer</title>
+
   <style>
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-    }
-
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      height: 100vh;
     }
 
     header {
       background: #1f2937;
-      color: white;
       padding: 12px;
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
-      align-items: center;
-    }
-
-    .title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-right: 10px;
     }
 
     button {
-      background: #e5e7eb;
-      border: none;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 20px;
+      border: none;
       cursor: pointer;
-      font-size: 14px;
-    }
-
-    button:hover {
-      background: #d1d5db;
+      background: #e5e7eb;
     }
 
     button.active {
@@ -55,41 +35,29 @@
     }
 
     iframe {
+      flex: 1;
       width: 100%;
-      height: calc(100vh - 70px);
       border: none;
     }
   </style>
 </head>
+
 <body>
 
   <header>
-    <div class="title">My 10 Programs</div>
-
-    <button class="pdf-btn active" data-src="PROG 1.pdf">PROG 1</button>
-<button class="pdf-btn" data-src="PROG 02.pdf">PROG 2</button>
-<button class="pdf-btn" data-src="PROG 3.pdf">PROG 3</button>
-<button class="pdf-btn" data-src="PROG 4.pdf">PROG 4</button>
-<button class="pdf-btn" data-src="PROG 5.pdf">PROG 5</button>
-<button class="pdf-btn" data-src="PROG 6.pdf">PROG 6</button>
-<button class="pdf-btn" data-src="PROG 7.pdf">PROG 7</button>
-<button class="pdf-btn" data-src="PROG 08.pdf">PROG 8</button>
-<button class="pdf-btn" data-src="PROG 09.pdf">PROG 9</button>
-<button class="pdf-btn" data-src="PROG 10.pdf">PROG 10</button>
-
+    <button class="link-btn active" data-src="https://chatgpt.com/s/t_6964e76775c48191b067bb46aa4006a5">LINK 1</button>
+    <button class="link-btn" data-src="https://chatgpt.com/s/t_6964e870626c81919d4410e66b5717d5">LINK 2</button>
   </header>
 
-  <iframe id="pdfFrame" src="PROG 1.pdf"></iframe>
+  <iframe id="viewer" src="https://example.com"></iframe>
 
   <script>
-    const buttons = document.querySelectorAll(".pdf-btn");
-    const iframe = document.getElementById("pdfFrame");
+    const buttons = document.querySelectorAll(".link-btn");
+    const iframe = document.getElementById("viewer");
 
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
-        const pdf = btn.getAttribute("data-src");
-        iframe.src = pdf;
-
+        iframe.src = btn.dataset.src;
         buttons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
       });
@@ -98,4 +66,3 @@
 
 </body>
 </html>
-
