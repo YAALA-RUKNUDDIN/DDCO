@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Two Links Viewer</title>
+  <title>Smart Link Viewer</title>
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -19,6 +21,7 @@
       padding: 12px;
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     button {
@@ -27,6 +30,7 @@
       border: none;
       cursor: pointer;
       background: #e5e7eb;
+      font-size: 14px;
     }
 
     button.active {
@@ -39,33 +43,79 @@
       width: 100%;
       border: none;
     }
+
+    .placeholder {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #6b7280;
+    }
   </style>
 </head>
 
 <body>
 
   <header>
-    <button class="link-btn active" data-src="https://chatgpt.com/s/t_6964e76775c48191b067bb46aa4006a5">LINK 1</button>
-    <button class="link-btn" data-src="https://chatgpt.com/s/t_6964e870626c81919d4410e66b5717d5">LINK 2</button>
+    <button class="link-btn active"
+      data-type="iframe"
+      data-src="https://drive.google.com/file/d/YOUR_FILE_ID/preview">
+      PDF / DRIVE
+    </button>
+
+    <button class="link-btn"
+      data-type="iframe"
+      data-src="https://yourdomain.com/image.jpg">
+      IMAGE
+    </button>
+
+    <button class="link-btn"
+      data-type="newtab"
+      data-src="https://chatgpt.com/s/t_6964e76775c48191b067bb46aa4006a5">
+      CHATGPT
+    </button>
+
+    <button class="link-btn"
+      data-type="newtab"
+      data-src="https://chatgpt.com/s/t_6964e870626c81919d4410e66b5717d5">
+      GOOGLE
+    </button>
   </header>
 
-<button onclick="window.open('https://chatgpt.com', '_blank')">
-  OPEN CHATGPT
-</button>
+  <iframe id="viewer"
+    src="https://drive.google.com/file/d/YOUR_FILE_ID/preview">
+  </iframe>
+
+  <div id="placeholder" class="placeholder" style="display:none;">
+    Opened in new tab
+  </div>
 
   <script>
     const buttons = document.querySelectorAll(".link-btn");
     const iframe = document.getElementById("viewer");
+    const placeholder = document.getElementById("placeholder");
 
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
-        iframe.src = btn.dataset.src;
+        const type = btn.dataset.type;
+        const src = btn.dataset.src;
+
         buttons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
+
+        if (type === "iframe") {
+          placeholder.style.display = "none";
+          iframe.style.display = "block";
+          iframe.src = src;
+        } else {
+          iframe.style.display = "none";
+          placeholder.style.display = "flex";
+          window.open(src, "_blank");
+        }
       });
     });
   </script>
 
 </body>
 </html>
-
