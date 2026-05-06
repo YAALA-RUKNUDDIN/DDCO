@@ -59,10 +59,10 @@
 
   <header>
     <button class="link-btn active"
-      data-type="iframe"
-      data-src="https://drive.google.com/file/d/YOUR_FILE_ID/preview">
-      PDF / DRIVE
-    </button>
+  data-type="iframe"
+  data-src="Correct_ARM_Programs_1_to_4.pdf">
+  ARM PDF
+</button>
 
     <button class="link-btn"
       data-type="iframe"
@@ -83,9 +83,9 @@
     </button>
   </header>
 
-  <iframe id="viewer"
-    src="https://drive.google.com/file/d/YOUR_FILE_ID/preview">
-  </iframe>
+ <iframe id="viewer"
+  src="Correct_ARM_Programs_1_to_4.pdf">
+</iframe>
 
   <div id="placeholder" class="placeholder" style="display:none;">
     Opened in new tab
@@ -100,7 +100,155 @@
       btn.addEventListener("click", () => {
         const type = btn.dataset.type;
         const src = btn.dataset.src;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Link Viewer</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #f3f4f6;
+    }
+
+    header {
+      background: #1f2937;
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      background: #e5e7eb;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #d1d5db;
+    }
+
+    button.active {
+      background: #2563eb;
+      color: white;
+    }
+
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: white;
+    }
+
+    .placeholder {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <!-- YOUR PDF -->
+    <button class="link-btn active"
+      data-type="iframe"
+      data-src="Correct_ARM_Programs_1_to_4.pdf">
+      ARM PDF
+    </button>
+
+    <!-- IMAGE -->
+    <button class="link-btn"
+      data-type="iframe"
+      data-src="https://yourdomain.com/image.jpg">
+      IMAGE
+    </button>
+
+    <!-- CHATGPT -->
+    <button class="link-btn"
+      data-type="newtab"
+      data-src="https://chatgpt.com/s/t_6964e76775c48191b067bb46aa4006a5">
+      CHATGPT
+    </button>
+
+    <!-- GOOGLE -->
+    <button class="link-btn"
+      data-type="newtab"
+      data-src="https://chatgpt.com/s/t_6964e870626c81919d4410e66b5717d5">
+      GOOGLE
+    </button>
+
+  </header>
+
+  <!-- PDF VIEWER -->
+  <iframe id="viewer"
+    src="Correct_ARM_Programs_1_to_4.pdf">
+  </iframe>
+
+  <div id="placeholder"
+    class="placeholder"
+    style="display:none;">
+    Opened in new tab
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll(".link-btn");
+    const iframe = document.getElementById("viewer");
+    const placeholder = document.getElementById("placeholder");
+
+    buttons.forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        const type = btn.dataset.type;
+        const src = btn.dataset.src;
+
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        if (type === "iframe") {
+
+          placeholder.style.display = "none";
+          iframe.style.display = "block";
+
+          iframe.src = src;
+
+        } else {
+
+          iframe.style.display = "none";
+          placeholder.style.display = "flex";
+
+          window.open(src, "_blank");
+
+        }
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>
         buttons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
